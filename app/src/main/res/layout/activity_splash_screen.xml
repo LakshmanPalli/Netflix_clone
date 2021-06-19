@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#d9262a"
-    tools:context=".SplashScreen">
+    tools:context=".Activities.SplashScreen">
 
     <ImageView
         android:id="@+id/netflix_img"
