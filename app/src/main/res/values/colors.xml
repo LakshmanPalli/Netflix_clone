@@ -6,6 +6,7 @@
     <color name="colorAccent">#d9262a</color>
    <color name="button_color">#610101</color>
     <color name="progressbar">#d9262a</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="activedots">#CD1212</color>
+    <color name="inactivedots">#48494A</color>
+    <color name="white">#fff</color>
 </resources>

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Netflix_clone">
-        <activity android:name=".Activities.SigninActivity"></activity>
+        <activity android:name=".MainScreens.MainScreen"></activity>
+        <activity android:name=".Activities.SwipeScreen" />
+        <activity android:name=".Activities.SigninActivity" />
         <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
