@@ -9,4 +9,5 @@
     <color name="activedots">#CD1212</color>
     <color name="inactivedots">#48494A</color>
     <color name="white">#fff</color>
+    <color name="black">#000</color>
 </resources>
