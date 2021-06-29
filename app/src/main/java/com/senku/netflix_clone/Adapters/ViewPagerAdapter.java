@@ -18,6 +18,10 @@ public class ViewPagerAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     private Integer[] images={R.drawable.ic_net,R.drawable.netflix_img, R.drawable.ic_netflix_logo_icon_170918};
 
+    public ViewPagerAdapter(Context context) {
+        this.context = context;
+    }
+
     @Override
     public int getCount() {
         return images.length;
@@ -34,7 +38,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.custom_layout, null);
-        ImageView imageView = (ImageView) view.findViewById(R.id.imageviewforcustomlayout);
+        ImageView imageView = view.findViewById(R.id.imageviewforcustomlayout);
         imageView.setImageResource(images[position]);
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view,0);
