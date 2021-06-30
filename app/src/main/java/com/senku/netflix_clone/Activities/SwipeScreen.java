@@ -82,7 +82,7 @@ public class SwipeScreen extends AppCompatActivity {
         getstarted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SwipeScreen.this, Plan.class);
+                Intent intent = new Intent(SwipeScreen.this, StepOne.class);
                 startActivity(intent);
             }
         });

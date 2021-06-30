@@ -1,0 +1,110 @@
+<merge xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SwipeScreen">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/swipetoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:theme="@style/Theme.AppCompat.Dialog"
+        android:background="@color/colorPrimary"
+        android:padding="0dp"
+        tools:ignore="MissingConstraints">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
+
+            <ImageView
+                android:id="@+id/netflixlogo"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:src="@drawable/ic_net"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="3dp"/>
+            <TextView
+                android:id="@+id/privacytextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/netflixlogo"
+                android:layout_marginStart="124dp"
+                android:layout_marginTop="15dp"
+                android:text="PRIVACY"
+                android:textColor="#ffff"
+                android:textSize="15dp"
+                />
+            <TextView
+                android:id="@+id/helptextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/privacytextview"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="HELP"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                />
+            <TextView
+                android:id="@+id/signintextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/helptextview"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="15dp"
+                android:text="SIGNIN"
+                android:textColor="#fff"
+                android:textSize="15dp"
+                />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/swipetoolbar"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="55dp"
+        tools:ignore="MissingConstraints">
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="586dp"
+            android:layout_marginTop="57dp"
+            android:layout_marginBottom="200dp"
+            android:background="@color/colorPrimaryDark"
+            />
+        <LinearLayout
+            android:layout_width="340dp"
+            android:id="@+id/sliderdots"
+            android:layout_height="20dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="500dp"
+            android:layout_marginBottom="100dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            />
+    </RelativeLayout>
+
+        <Button
+            android:id="@+id/gettingstartedbtn"
+            android:layout_width="374dp"
+            android:layout_height="62dp"
+            android:layout_marginBottom="24dp"
+            android:text="GETTING STARTED"
+            android:textColor="#fff"
+            android:background="@color/activedots"
+            android:textAlignment="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</merge>

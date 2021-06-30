@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Netflix_clone">
-        <activity android:name=".Activities.Plan"></activity>
+        <activity android:name=".Activities.StepOne"></activity>
         <activity android:name=".MainScreens.MainScreen" />
         <activity android:name=".Activities.SwipeScreen" />
         <activity android:name=".Activities.SigninActivity" />
