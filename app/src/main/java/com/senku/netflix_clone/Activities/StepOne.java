@@ -1,4 +1,4 @@
-package com.senku.netflix_clone.Activities;
+ package com.senku.netflix_clone.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
