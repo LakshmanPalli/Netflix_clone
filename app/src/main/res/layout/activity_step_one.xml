@@ -7,7 +7,7 @@
     tools:context=".Activities.StepOne">
     <include layout="@layout/toolbar_stepone"/>
     <LinearLayout
-        android:layout_width="393dp"
+        android:layout_width="410dp"
         android:layout_height="549dp"
         android:layout_marginTop="80dp"
         android:orientation="vertical"
@@ -20,6 +20,7 @@
             />
 
         <TextView
+            android:id="@+id/steponeofthree"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|center_horizontal"
@@ -37,10 +38,69 @@
             android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
         <LinearLayout
-            android:layout_width="93dp"
-            android:layout_height="295dp"
-            android:orientation="horizontal"
-            />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp">
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:textColor="@color/colorAccent"/>
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:textColor="@color/colorAccent"/>
+                <ImageView
+                    android:layout_width="68dp"
+                    android:layout_height="68dp"
+                    android:src="@drawable/ic_baseline_check_24"
+                    android:textColor="@color/colorAccent"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="68dp"
+                    android:text="No commitments cancel at any time."
+                    android:textSize="22dp"
+                    android:textColor="#494242"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="68dp"
+                    android:text="Everything on Netflix for one low price."
+                    android:textSize="22dp"
+                    android:textColor="#494242"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="68dp"
+                    android:layout_marginTop="15dp"
+                    android:text="No ads and no extra fees. Ever."
+                    android:textSize="22dp"
+                    android:textColor="#494242"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/seeyourplanbtn"
+            android:layout_width="330dp"
+            android:layout_height="60dp"
+            android:textSize="20dp"
+            android:textColor="#fff"
+            android:padding="10dp"
+            android:text="see your plan"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"/>
 
 
     </LinearLayout>
