@@ -30,7 +30,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Choose the plan that's right for you."
                 android:textColor="#000"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_marginTop="11dp"
                 android:text="Downgrade or upgrade at anytime."
                 android:textColor="#000"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 />
 
             <androidx.cardview.widget.CardView
@@ -68,25 +68,26 @@
                         android:layout_height="wrap_content"
                         android:text="Basic"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="241dp"
                     android:layout_height="49dp"
-                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
                     android:layout_marginTop="45dp"
                     android:text="₹349 /month"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_height="250dp"
                     android:layout_marginTop="30dp"
-                    android:src="@drawable/basicplanimage" />
+                    android:src="@drawable/basicplanimage"
+                    tools:ignore="ContentDescription" />
 
             </androidx.cardview.widget.CardView>
 
@@ -115,24 +116,24 @@
                         android:layout_height="wrap_content"
                         android:text="Standard"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="241dp"
                     android:layout_height="49dp"
-                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
                     android:layout_marginTop="45dp"
                     android:text="₹649 /month"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_height="250dp"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="30dp"
                     android:src="@drawable/standardplanimage" />
 
@@ -163,22 +164,22 @@
                         android:layout_height="wrap_content"
                         android:text="Premium"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="241dp"
                     android:layout_height="49dp"
-                    android:layout_marginLeft="48dp"
+                    android:layout_marginStart="48dp"
                     android:layout_marginTop="45dp"
                     android:text="₹799 /month"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginEnd="15dp"
                     android:layout_height="250dp"
                     android:layout_marginTop="30dp"
                     android:src="@drawable/premiumplanimage" />
@@ -193,10 +194,10 @@
                 android:layout_marginTop="20dp"
                 android:textColor="@color/white"
                 android:layout_gravity="center"
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:background="@color/progressbar"
                 />
-"
+
 
 
 
