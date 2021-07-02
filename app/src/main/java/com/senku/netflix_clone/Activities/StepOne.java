@@ -23,9 +23,9 @@ public class StepOne extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_step_one);
-        signinTextview = findViewById(R.id.signinstepone);
         seeyourplanBtn = findViewById(R.id.seeyourplanbtn);
         steponeofthree = findViewById(R.id.steponeofthree);
+        signinTextview = findViewById(R.id.signinstepone);
 
         signinTextview.setOnClickListener(new View.OnClickListener() {
             @Override
