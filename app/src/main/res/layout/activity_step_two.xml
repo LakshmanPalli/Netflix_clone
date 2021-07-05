@@ -6,4 +6,165 @@
     android:layout_height="match_parent"
     tools:context=".Activities.StepTwo">
 
+    <include
+        android:id="@+id/include3"
+        layout="@layout/toolbar_stepone" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="365dp"
+        android:layout_height="220dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="25dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/steptwoofthree"
+            android:layout_width="136dp"
+            android:layout_height="47dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="Step 2 of 3"
+            android:textColor="@color/colorPrimary"
+            android:textFontWeight="30"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Creata a password to start your membership."
+            android:textColorHint="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="23dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:textAlignment="center"
+            android:layout_margin="7dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="Just a few steps and you are done!
+We hate paperwork, too."
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/childconstraintLayout"
+        android:layout_width="393dp"
+        android:layout_height="215dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="11dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emaillayoutstep2"
+            android:layout_width="0dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="#fff"
+            android:padding="1dp"
+            android:textColorHint="#000"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusBottomEnd="11dp"
+            app:boxCornerRadiusTopStart="11dp"
+            app:hintTextColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.346">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailedittextstep2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:hint="Email"
+                android:padding="1dp"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="18dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordlayoutstep2"
+            android:layout_width="0dp"
+            android:layout_height="61dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="32dp"
+            android:background="#fff"
+            android:padding="4dp"
+            android:textColorHint="#000"
+            app:boxBackgroundMode="filled"
+            app:boxCornerRadiusBottomEnd="11dp"
+            app:boxCornerRadiusTopStart="11dp"
+            app:hintTextColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.346"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordedittextstep2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                android:hint="Password "
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#000"
+                android:textSize="20dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="51dp"
+            android:layout_height="76dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="42dp"
+            android:theme="@style/AppTheme.Custom"
+            app:layout_constraintBottom_toBottomOf="@+id/passwordlayoutstep2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/emaillayoutstep2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="196dp"
+        android:layout_height="69dp"
+        android:background="@color/progressbar"
+        android:text="continue"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/childconstraintLayout"
+        app:layout_constraintVertical_bias="0.702" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
