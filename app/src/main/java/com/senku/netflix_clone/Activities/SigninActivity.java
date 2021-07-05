@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.senku.netflix_clone.MainScreens.MainScreen;
 import com.senku.netflix_clone.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class SigninActivity extends AppCompatActivity {
     TextView signuptextview, forgotpasswordtextview;
     ProgressBar progressBar;
@@ -28,7 +31,8 @@ public class SigninActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_signin);
         progressBar = findViewById(R.id.signinprogressbar);
-        progressBar.setVisibility(View.GONE); //initially progressbar is absent, it appears later
+        progressBar.setVisibility(View.GONE);
+        progress(); //initially progressbar is absent, it appears later
         signuptextview = findViewById(R.id.signuptextview);
         forgotpasswordtextview = findViewById(R.id.forgotpasswordtextview);
         signinbtn = findViewById(R.id.Btn_signin);
@@ -53,7 +57,19 @@ public class SigninActivity extends AppCompatActivity {
                 Toast.makeText(SigninActivity.this, "Forgot password", Toast.LENGTH_SHORT).show();
             }
         });
-
-
+    }
+    // code for progress bar to work for a counter time
+    public void progress(){
+        final Timer timer = new Timer();
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                counter++;
+                if (counter == duration){
+                    timer.cancel();
+                }
+            }
+        };
+        timer.schedule(timerTask,0,100);
     }
 }

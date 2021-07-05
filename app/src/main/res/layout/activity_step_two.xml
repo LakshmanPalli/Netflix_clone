@@ -139,7 +139,7 @@ We hate paperwork, too."
         </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar
-            android:id="@+id/progressBar"
+            android:id="@+id/steptwoprogressBar"
             android:layout_width="51dp"
             android:layout_height="76dp"
             android:layout_marginTop="40dp"
@@ -152,7 +152,7 @@ We hate paperwork, too."
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/continue_btn_step_two"
         android:layout_width="196dp"
         android:layout_height="69dp"
         android:background="@color/progressbar"
