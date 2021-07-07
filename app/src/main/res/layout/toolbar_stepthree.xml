@@ -30,14 +30,14 @@
             android:src="@drawable/ic_netflix_logo_icon_170918" />
 
         <TextView
-            android:id="@+id/signinstepone"
-            android:layout_width="70dp"
+            android:id="@+id/signoutstepthree"
+            android:layout_width="90dp"
             android:layout_height="29dp"
-            android:layout_marginStart="210dp"
+            android:layout_marginStart="200dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="15dp"
             android:layout_toEndOf="@+id/netflixlogo"
-            android:text="SIGNIN"
+            android:text="SIGNOUT"
             android:textColor="#000"
             android:textSize="20dp"
             android:textStyle="bold" />
