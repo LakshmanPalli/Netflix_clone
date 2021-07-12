@@ -158,17 +158,17 @@
                 android:id="@+id/hor"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_marginLeft="55dp"
+                android:background="@drawable/linearlayoutstroke"
                 android:backgroundTint="#AAA8A8"
-                android:background="#989696"
-                android:layout_marginLeft="55dp">
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:id="@+id/ver"
                     android:layout_width="wrap_content"
                     android:layout_height="60dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="6dp"
                     android:orientation="vertical">
@@ -202,10 +202,10 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="50dp"
-                    android:background="#474242"
+                    android:background="@drawable/linearlayoutstroke"
                     android:backgroundTint="#888787"
-                    android:paddingTop="28dp"
                     android:paddingLeft="17dp"
+                    android:paddingTop="28dp"
                     android:text="CHANGE"
                     android:textColor="#C62828"
                     android:textSize="18dp"
@@ -234,8 +234,8 @@
                 android:layout_height="60dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="25dp"
-                android:text="START MEMBERSHIP"
-                android:layout_marginBottom="0dp"/>
+                android:layout_marginBottom="0dp"
+                android:text="START MEMBERSHIP" />
 
 
         </LinearLayout>
