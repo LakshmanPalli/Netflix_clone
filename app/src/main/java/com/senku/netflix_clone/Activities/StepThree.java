@@ -40,7 +40,7 @@ public class StepThree extends AppCompatActivity {
             }
         });
 
-        SpannableString st = new SpannableString("Step 1 OF 3");
+        SpannableString st = new SpannableString("STEP 3 OF 3");
         StyleSpan boldspan = new StyleSpan(Typeface.BOLD);
         StyleSpan boldspan1 = new StyleSpan(Typeface.BOLD);
         st.setSpan(boldspan, 5,6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

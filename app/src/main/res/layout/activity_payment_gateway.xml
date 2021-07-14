@@ -12,18 +12,19 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="413dp"
-        android:layout_height="669dp"
+        android:layout_width="411dp"
+        android:layout_height="676dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include4">
 
         <TextView
+            android:id="@id/step3of3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="4dp"
+            android:layout_marginBottom="5dp"
             android:text="STEP 3 of 3"
             android:textColor="@color/colorPrimary"
             android:textSize="30dp" />
@@ -32,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Set up your credit or debit card."
             android:textColor="@color/colorPrimary"
             android:textSize="25dp"
@@ -112,9 +113,11 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/firstnameEdittext"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/button_stroke"
+                            android:textSize="15dp"
                             android:hint="First number" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -129,9 +132,11 @@
                         app:layout_constraintTop_toBottomOf="@id/firstname">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/lastnameEdittext"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/button_stroke"
+                            android:textSize="15dp"
                             android:hint="Last name" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,9 +150,11 @@
                         app:layout_constraintTop_toBottomOf="@+id/lastname">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/contactnoEdittext"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@drawable/button_stroke"
+                            android:textSize="15dp"
                             android:hint="Contact number" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -174,7 +181,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/costtoset"
+                        android:id="@+id/plannametoset"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -185,12 +192,12 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/plannametoset"
+                        android:id="@+id/costtoset"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="1dp"
                         android:layout_marginRight="20dp"
-                        android:text="₹349/month"
+                        android:text="349₹/month"
                         android:textColor="@color/colorPrimary"
                         android:textSize="20dp"
                         android:textStyle="bold" />
@@ -198,7 +205,7 @@
 
                 <TextView
                     android:id="@+id/change"
-                    android:layout_width="102dp"
+                    android:layout_width="103dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="50dp"
@@ -214,6 +221,7 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/termstext"
                 android:layout_width="326dp"
                 android:layout_height="35dp"
                 android:layout_marginLeft="35dp"
@@ -222,6 +230,7 @@
                 android:textColor="@color/colorPrimary" />
 
             <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/iagreebtn"
                 android:layout_width="143dp"
                 android:layout_height="37dp"
                 android:layout_marginLeft="30dp"
@@ -230,6 +239,7 @@
             </androidx.appcompat.widget.AppCompatCheckBox>
 
             <Button
+                android:id="@+id/startyourmemberbtn"
                 android:layout_width="325dp"
                 android:layout_height="60dp"
                 android:layout_marginLeft="40dp"
