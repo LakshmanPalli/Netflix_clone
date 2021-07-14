@@ -1,5 +1,6 @@
 package com.senku.netflix_clone.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -12,6 +13,7 @@ import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,8 +24,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
+import com.senku.netflix_clone.MainScreens.MainScreen;
 import com.senku.netflix_clone.R;
+
+import org.json.JSONObject;
 
 import java.util.Objects;
 
@@ -35,6 +41,7 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
     Button startYourMembership;
     CheckBox iAgree;
     TextView termstext, step3of3,changebtn, costset, planset;
+    String TAG = "Payment Error";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +55,8 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         planCostFormat = intent.getStringExtra("PlanCostFormat");
         useremail = intent.getStringExtra("EmailId");
         userpassword = intent.getStringExtra("Password");
-        Toast.makeText(this, ""+planName+"\n"+planCost+"\n"+planCostFormat+"\n"+useremail+"\n"+userpassword, Toast.LENGTH_LONG).show();
+
+        Checkout.preload(getApplicationContext()); //To quickly load the Checkout form, the preload method of Checkout must be called much earlier than the other methods in the payment flow.
 
         firstNameEditText = findViewById(R.id.firstnameEdittext);
         lastNameEditText = findViewById(R.id.lastnameEdittext);
@@ -117,21 +125,42 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         startYourMembership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firstname = firstNameEditText.getText().toString();
-                lastname = lastNameEditText.getText().toString();
-                contactno = contactNumberedEditText.getText().toString();
-
+                startPayment();
             }
         });
+    }
+    public void startPayment(){
+        Checkout checkout = new Checkout();
+        final Activity activity = this;
+        firstname = firstNameEditText.getText().toString();
+        lastname = lastNameEditText.getText().toString();
+        contactno = contactNumberedEditText.getText().toString();
+        String name = firstname+lastname;
+        try {
+            JSONObject options = new JSONObject(); // to sent json data to web
+            options.put("name", name);
+            options.put("description", "APP PAYMENT");
+            options.put("currency", "INR");
+            // by default it is in paisa , so to change it in rupees
+            double cost = Double.parseDouble(planCost);
+            cost = cost*100;
+            options.put("amount", cost);
+            options.put("prefill.email", useremail);
+            options.put("prefill.contact", contactno);
+            checkout.open(activity, options); // checkout.open() takes activity, the JSON object to work, open payment
+        } catch (Exception e){
+            Log.e(TAG, "error occurs",e);
+        }
     }
 
     @Override
     public void onPaymentSuccess(String s) {
-
+        Intent i = new Intent(PaymentGateway.this, MainScreen.class);
+        startActivity(i);
     }
 
     @Override
     public void onPaymentError(int i, String s) {
-
+        Toast.makeText(this, "payment unsuccessful",Toast.LENGTH_LONG).show();
     }
 }
