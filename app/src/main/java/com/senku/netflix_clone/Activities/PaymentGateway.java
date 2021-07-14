@@ -1,9 +1,5 @@
 package com.senku.netflix_clone.Activities;
 
-import androidx.annotation.NonNull;
-import
-        androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -23,12 +19,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.senku.netflix_clone.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.razorpay.PaymentResultListener;
+import com.senku.netflix_clone.R;
 
 import java.util.Objects;
 
-public class PaymentGateway extends AppCompatActivity {
+public class PaymentGateway extends AppCompatActivity implements  PaymentResultListener {
     String planName, planCost, planCostFormat; // to receive, display(toast) sent extras from StepThree.java
     String firstname, lastname, contactno;
     String useremail, userpassword;
@@ -124,5 +123,15 @@ public class PaymentGateway extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onPaymentSuccess(String s) {
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+
     }
 }
