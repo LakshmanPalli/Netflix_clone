@@ -1,7 +1,5 @@
 package com.senku.netflix_clone.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,9 +13,15 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.senku.netflix_clone.R;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.senku.netflix_clone.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,6 +33,8 @@ public class StepTwo extends AppCompatActivity {
     Button continueBtn;
     TextView signinTextview, steptwoofthree;
     int counter =0;
+    Boolean bool;
+    FirebaseAuth firebaseAuth;
 
 
     @Override
@@ -44,6 +50,7 @@ public class StepTwo extends AppCompatActivity {
         EditText email = findViewById(R.id.emailedittextstep2) ;
         EditText password = findViewById(R.id.passwordedittextstep2);
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
         Intent intent = getIntent();
         planName = intent.getStringExtra("PlanName");
@@ -66,13 +73,43 @@ public class StepTwo extends AppCompatActivity {
             public void onClick(View view) {
                 useremail = email.getText().toString();
                 userpassword = password.getText().toString();
-                Intent intent = new Intent(StepTwo.this, StepThree.class);
-                intent.putExtra("PlanName", planName);
-                intent.putExtra("PlanCost", planCost);
-                intent.putExtra("PlanCostFormat", planCostFormat);
-                intent.putExtra("EmailId", useremail);
-                intent.putExtra("Password", userpassword);
-                startActivity(intent);
+                bool=true;
+                if (useremail.length() < 10|| !useremail.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")){
+                    email.setError("Enter a valid email id");
+                    bool=false;
+                }
+                if (userpassword.length() < 8){
+                    password.setError("Password too short");
+                    bool=false;
+                }
+                if(bool) {
+                    firebaseAuth.signInWithEmailAndPassword(useremail, userpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {  //If already a user(mail id:[exist], password:[exist]), move to SignIn activity
+                            if (task.isSuccessful()) {
+                                bool= false;
+                                Toast.makeText(getApplicationContext(), "Please enter via the main login screen", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(StepTwo.this, SigninActivity.class);
+                                startActivity(i);
+                                finish();
+                            } else {    //If mail id:[exist], password:[unmatched]
+                                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) { // when existing mail address provided
+                                    email.setError("Email id already registered");
+                                    bool = false;
+                                }
+                            }
+                            if (useremail.length() > 9 && userpassword.length() > 7 && useremail.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$") && bool) { // mail id:[valid], password:[valid]
+                                Intent intent = new Intent(StepTwo.this, StepThree.class);
+                                intent.putExtra("PlanName", planName);
+                                intent.putExtra("PlanCost", planCost);
+                                intent.putExtra("PlanCostFormat", planCostFormat);
+                                intent.putExtra("EmailId", useremail);
+                                intent.putExtra("Password", userpassword);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+                }
             }
         });
     // to bold step 2 of 3 text

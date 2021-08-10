@@ -100,7 +100,9 @@ We hate paperwork, too."
                 android:padding="1dp"
                 android:textColor="#000"
                 android:textColorHint="#000"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -135,7 +137,9 @@ We hate paperwork, too."
                 android:padding="8dp"
                 android:textColor="#000"
                 android:textColorHint="#000"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <ProgressBar
