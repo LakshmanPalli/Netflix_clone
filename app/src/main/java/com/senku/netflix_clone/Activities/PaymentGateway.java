@@ -24,6 +24,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.senku.netflix_clone.MainScreens.MainScreen;
@@ -42,6 +46,7 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
     CheckBox iAgree;
     TextView termstext, step3of3,changebtn, costset, planset;
     String TAG = "Payment Error";
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +73,7 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         changebtn = findViewById(R.id.change);
         costset = findViewById(R.id.costtoset);
         planset = findViewById(R.id.plannametoset);
-
+        firebaseAuth = FirebaseAuth.getInstance();
         //
         planset.setText(planName);
         costset.setText(planCostFormat);
@@ -155,8 +160,23 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
 
     @Override
     public void onPaymentSuccess(String s) {
-        Intent i = new Intent(PaymentGateway.this, MainScreen.class);
-        startActivity(i);
+        try {
+            firebaseAuth.createUserWithEmailAndPassword(useremail, userpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    try {
+                        Intent i = new Intent(PaymentGateway.this, MainScreen.class);
+                        startActivity(i);
+                    }
+                    catch (Exception e){
+                        Log.e(TAG, "error occurred in onPayment's success - [onComplete]");
+                    }
+                }
+            });
+        }
+        catch (Exception e){
+            Log.e(TAG, "error occurred in onPayment success",e);
+        }
     }
 
     @Override

@@ -155,7 +155,8 @@
                             android:layout_height="match_parent"
                             android:background="@drawable/button_stroke"
                             android:textSize="15dp"
-                            android:hint="Contact number" />
+                            android:hint="Contact number"
+                            android:inputType="number"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
