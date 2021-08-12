@@ -1,7 +1,5 @@
 package com.senku.netflix_clone.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.senku.netflix_clone.MainScreens.MainScreen;
 import com.senku.netflix_clone.R;
 
@@ -18,9 +19,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SigninActivity extends AppCompatActivity {
+    EditText siginEmail, signinPassword;
     TextView signuptextview, forgotpasswordtextview;
     ProgressBar progressBar;
     Button signinbtn;
+    String authemail, authpassword;
+
+    FirebaseAuth firebaseAuth;
 
     static int duration= 1000;
     static int counter = 0;
@@ -36,27 +41,41 @@ public class SigninActivity extends AppCompatActivity {
         signuptextview = findViewById(R.id.signuptextview);
         forgotpasswordtextview = findViewById(R.id.forgotpasswordtextview);
         signinbtn = findViewById(R.id.Btn_signin);
+        siginEmail = findViewById(R.id.emailedittext);
+        signinPassword = findViewById(R.id.passwordedittext);
 
-        signinbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SigninActivity.this, MainScreen.class);
-                startActivity(intent);
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        signinbtn.setOnClickListener(v -> {
+            authemail = siginEmail.getText().toString();
+            authpassword = signinPassword.getText().toString();
+            if (authemail.length()>8 && authemail.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$") && authpassword.length()>7) {
+                firebaseAuth.signInWithEmailAndPassword(authemail, authpassword).addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Intent intent = new Intent(SigninActivity.this, MainScreen.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Wrong email and password", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            else{
+                if (authemail.length() <= 8 || !authemail.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")){
+                    siginEmail.setError("Enter a valid email");
+                }
+                else if (authpassword.length() < 8){
+                    signinPassword.setError("Enter a valid password");
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        signuptextview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SigninActivity.this, SwipeScreen.class);
-                startActivity(intent);
-            }
+        signuptextview.setOnClickListener(v -> {
+            Intent intent = new Intent(SigninActivity.this, SwipeScreen.class);
+            startActivity(intent);
         });
-        forgotpasswordtextview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SigninActivity.this, "Forgot password", Toast.LENGTH_SHORT).show();
-            }
-        });
+        forgotpasswordtextview.setOnClickListener(v -> Toast.makeText(SigninActivity.this, "Forgot password", Toast.LENGTH_SHORT).show());
     }
     // code for progress bar to work for a counter time
     public void progress(){

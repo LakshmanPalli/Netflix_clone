@@ -1,7 +1,5 @@
 package com.senku.netflix_clone.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,6 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.senku.netflix_clone.R;
 
@@ -62,6 +62,8 @@ public class StepThree extends AppCompatActivity {
                 intent.putExtra("PlanName", planName);
                 intent.putExtra("PlanCost", planCost);
                 intent.putExtra("PlanCostFormat", planCostFormat);
+                intent.putExtra("EmailId", useremail);
+                intent.putExtra("Password", userpassword);
                 startActivity(intent);
             }
         });

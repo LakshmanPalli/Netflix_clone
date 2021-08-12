@@ -46,6 +46,7 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
     CheckBox iAgree;
     TextView termstext, step3of3,changebtn, costset, planset;
     String TAG = "Payment Error";
+    Boolean bool=false;
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -77,6 +78,11 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         //
         planset.setText(planName);
         costset.setText(planCostFormat);
+
+        //getting strings in varaibles
+        firstname = firstNameEditText.getText().toString();
+        lastname = lastNameEditText.getText().toString();
+        contactno = contactNumberedEditText.getText().toString();
 
 
         // spannable text edit of step3 of 3
@@ -130,7 +136,26 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         startYourMembership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (firstname.length()>3 && lastname.length()>3 && firstname.matches("[a-z A-Z]+") && lastname.matches("[a-z A-Z]+") && contactno.length()==10 && iAgree.isChecked()){ //does validation for the edittexts <firstname>,<lastname>,<contact.no>
                 startPayment();
+                }
+                else{ //throwing error red awareness for invalid inputs
+                    if (firstname.length()<=3 || !firstname.matches("[a-z A-Z]+")){
+                        firstNameEditText.setError("Enter a valid First name");
+                    }
+                    else if (lastname.length()<=3 || !lastname.matches("[a-z A-Z]+")){
+                        lastNameEditText.setError("Enter a valid Last name");
+                    }
+                    else if (contactno.length() != 10){
+                        contactNumberedEditText.setError("Enter a 10 digit phone number");
+                    }
+                    else if (!iAgree.isChecked()){
+                        Toast.makeText(getApplicationContext(), "Please agree to the policy", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
