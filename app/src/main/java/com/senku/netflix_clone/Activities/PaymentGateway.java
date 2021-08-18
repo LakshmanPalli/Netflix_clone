@@ -25,9 +25,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 import com.senku.netflix_clone.MainScreens.MainScreen;
@@ -35,6 +39,10 @@ import com.senku.netflix_clone.R;
 
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class PaymentGateway extends AppCompatActivity implements  PaymentResultListener {
@@ -46,8 +54,12 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
     CheckBox iAgree;
     TextView termstext, step3of3,changebtn, costset, planset;
     String TAG = "Payment Error";
-    Boolean bool=false;
+    String userId; //for firebase firestore user id.
+
     FirebaseAuth firebaseAuth;
+    FirebaseFirestore firebaseFirestore;
+
+    Date today, validDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,15 +87,17 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         costset = findViewById(R.id.costtoset);
         planset = findViewById(R.id.plannametoset);
         firebaseAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
+
+        //For tallying the one month(+1) using calendar
+        Calendar calendar = Calendar.getInstance();
+                    today = calendar.getTime();
+                    calendar.add(Calendar.MONTH, 1);
+                    validDate = calendar.getTime();
+
         //
         planset.setText(planName);
         costset.setText(planCostFormat);
-
-        //getting strings in varaibles
-        firstname = firstNameEditText.getText().toString();
-        lastname = lastNameEditText.getText().toString();
-        contactno = contactNumberedEditText.getText().toString();
-
 
         // spannable text edit of step3 of 3
         SpannableString st = new SpannableString("STEP 3 OF 3");
@@ -136,6 +150,11 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
         startYourMembership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //getting strings in varaibles
+                firstname = firstNameEditText.getText().toString();
+                lastname = lastNameEditText.getText().toString();
+                contactno = contactNumberedEditText.getText().toString();
+
                 if (firstname.length()>3 && lastname.length()>3 && firstname.matches("[a-z A-Z]+") && lastname.matches("[a-z A-Z]+") && contactno.length()==10 && iAgree.isChecked()){ //does validation for the edittexts <firstname>,<lastname>,<contact.no>
                 startPayment();
                 }
@@ -189,14 +208,30 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
             firebaseAuth.createUserWithEmailAndPassword(useremail, userpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    try {
-                        Intent i = new Intent(PaymentGateway.this, MainScreen.class);
-                        startActivity(i);
-                    }
-                    catch (Exception e){
-                        Log.e(TAG, "error occurred in onPayment's success - [onComplete]");
-                    }
-                }
+                    if (task.isSuccessful()){
+                        userId = firebaseAuth.getCurrentUser().getUid(); //to get the unique user id given by firebase auth
+                        DocumentReference documentReference = firebaseFirestore.collection("Users").document(userId);
+                        Map<String,Object> user = new HashMap<>();
+                        user.put("Email", useremail);
+                        user.put("First_Name", firstname);
+                        user.put("Last_Name", lastname);
+                        user.put("Plan_Cost", planCost);
+                        user.put("Contact_Number", contactno);
+                        user.put("Valid_date", validDate);
+                        documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Intent i = new Intent(PaymentGateway.this, MainScreen.class);
+                                startActivity(i);
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(getApplicationContext(), "Values not stored",Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                }}
             });
         }
         catch (Exception e){
