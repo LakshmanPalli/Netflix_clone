@@ -2,6 +2,7 @@ package com.senku.netflix_clone.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,6 +33,7 @@ public class SigninActivity extends AppCompatActivity {
     Button signinbtn;
     String authemail, authpassword;
 
+    String firebaseEmail, firebaseFirstname, firebaseLastname, firebaseContact;
     String UserId, valiDateString;
 
     FirebaseAuth firebaseAuth;
@@ -42,6 +44,7 @@ public class SigninActivity extends AppCompatActivity {
 
     static int duration= 1000;
     static int counter = 0;
+    final String DEBUG = "Debugging check proprietary";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,21 +81,25 @@ public class SigninActivity extends AppCompatActivity {
                         userReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                             @Override
                             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                /*
-                                // if date format doesn't work then use following string method
-                                valiDateString = documentSnapshot.getString("Valid_date");
-                                SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-                                try {
-                                    validDate=format.parse(valiDateString);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                } **/
+                                // Getting the values from firebase 'FireStore' using `documentSnapshot`
                                 validDate = documentSnapshot.getDate("Valid_date");
+                                firebaseFirstname = documentSnapshot.getString("First_Name");
+                                firebaseLastname = documentSnapshot.getString("Last_Name");
+                                firebaseEmail = documentSnapshot.getString("Email");
+                                firebaseContact = documentSnapshot.getString("Contact_Number");
+
+                                Log.i(DEBUG, "value of validDate: "+validDate+"value of today"+today);
                                 if (validDate.compareTo(today)>=0){ //if the validDate > today => 1; validDate == today => 0; validDate < today => -ve;
                                     Intent i = new Intent(SigninActivity.this, MainScreen.class);
                                     startActivity(i);
                                 }else {
-                                    Toast.makeText(getApplicationContext(), "Plan Expired", Toast.LENGTH_SHORT).show();
+                                    Intent i = new Intent(SigninActivity.this, PaymentOverdue.class);
+                                    i.putExtra("firstname", firebaseFirstname);
+                                    i.putExtra("lasttname", firebaseLastname);
+                                    i.putExtra("email", authemail);
+                                    i.putExtra("contact", firebaseContact);
+                                    i.putExtra("userid", UserId);
+                                    startActivity(i);
                                 }
                             }
                         });
