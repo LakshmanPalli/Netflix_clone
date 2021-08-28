@@ -1,5 +1,6 @@
 package com.senku.netflix_clone.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
@@ -29,13 +31,16 @@ import java.util.TimerTask;
 public class StepTwo extends AppCompatActivity {
     String planName, planCost, planCostFormat;
     String useremail, userpassword;
-    ProgressBar progressBar;
-    Button continueBtn;
-    TextView signinTextview, steptwoofthree;
     int counter =0;
     Boolean bool;
-    FirebaseAuth firebaseAuth;
+    final String TAG = getClass().getName();
 
+    ProgressBar progressBar;
+    ProgressDialog progressDialog;
+    Button continueBtn;
+    TextView signinTextview, steptwoofthree;
+
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +88,10 @@ public class StepTwo extends AppCompatActivity {
                     bool=false;
                 }
                 if(bool) {
+                    progressDialog = new ProgressDialog(StepTwo.this);
+                    progressDialog.setMessage("Loading..."); //defining the progressDailog when clicked 'start membership' btn
+                    progressDialog.show();
+
                     firebaseAuth.signInWithEmailAndPassword(useremail, userpassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {  //If already a user(mail id:[exist], password:[exist]), move to SignIn activity
@@ -91,11 +100,16 @@ public class StepTwo extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "Please enter via the main login screen", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(StepTwo.this, SigninActivity.class);
                                 startActivity(i);
-                                finish();
                             } else {    //If mail id:[exist], password:[unmatched]
                                 if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) { // when existing mail address provided
                                     email.setError("Email id already registered");
                                     bool = false;
+                                    progressDialog.cancel();
+                                }
+                                if(task.getException() instanceof FirebaseNetworkException){
+                                    Toast.makeText(getApplicationContext(), "No internet connection", Toast.LENGTH_LONG).show(); ////when a network failure
+                                    bool = false;
+                                    progressDialog.cancel();
                                 }
                             }
                             if (useremail.length() > 9 && userpassword.length() > 7 && useremail.matches("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$") && bool) { // mail id:[valid], password:[valid]
@@ -106,6 +120,7 @@ public class StepTwo extends AppCompatActivity {
                                 intent.putExtra("EmailId", useremail);
                                 intent.putExtra("Password", userpassword);
                                 startActivity(intent);
+                                progressDialog.cancel();
                             }
                         }
                     });

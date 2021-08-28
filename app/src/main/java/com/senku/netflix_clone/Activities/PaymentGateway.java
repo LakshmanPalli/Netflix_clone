@@ -1,6 +1,7 @@
 package com.senku.netflix_clone.Activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -28,6 +29,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -60,6 +62,7 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
     FirebaseFirestore firebaseFirestore;
 
     Date today, validDate;
+    ProgressDialog progressDialog;// loading dialog box
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,7 +159,10 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
                 contactno = contactNumberedEditText.getText().toString();
 
                 if (firstname.length()>3 && lastname.length()>3 && firstname.matches("[a-z A-Z]+") && lastname.matches("[a-z A-Z]+") && contactno.length()==10 && iAgree.isChecked()){ //does validation for the edittexts <firstname>,<lastname>,<contact.no>
-                startPayment();
+                    progressDialog = new ProgressDialog(PaymentGateway.this);
+                    progressDialog.setMessage("Loading..."); //defining the progressDailog when clicked 'start membership' btn
+                    progressDialog.show();
+                    startPayment();
                 }
                 else{ //throwing error red awareness for invalid inputs
                     if (firstname.length()<=3 || !firstname.matches("[a-z A-Z]+")){
@@ -173,6 +179,7 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
                     }
                     else {
                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                        progressDialog.cancel();
                     }
                 }
             }
@@ -228,7 +235,12 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
+                                if(task.getException() instanceof FirebaseNetworkException){
+                                    Toast.makeText(getApplicationContext(), "No internet connection",Toast.LENGTH_LONG).show(); //when a network failure
+                                    progressDialog.cancel();
+                                }
                                 Toast.makeText(getApplicationContext(), "Values not stored",Toast.LENGTH_SHORT).show();
+                                progressDialog.cancel();
                             }
                         });
                 }}
@@ -242,5 +254,6 @@ public class PaymentGateway extends AppCompatActivity implements  PaymentResultL
     @Override
     public void onPaymentError(int i, String s) {
         Toast.makeText(this, "payment unsuccessful",Toast.LENGTH_LONG).show();
+        progressDialog.cancel();
     }
 }

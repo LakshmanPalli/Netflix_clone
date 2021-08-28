@@ -1,6 +1,7 @@
 package com.senku.netflix_clone.Activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -36,6 +38,8 @@ public class PaymentOverdue extends AppCompatActivity implements PaymentResultLi
     TextView signinTextview;
     Button payButton;
     RadioButton radioBasic, radioStandard, radioPremium;
+    ProgressDialog progressDialog;
+
     String planName, planCost, planFormatOfCost;
     String getFirstName, getLastName, getEmail, getUserId, getContact; // variables received from sent Intent
     final String TAG = "PaymentOverdue Error";
@@ -91,6 +95,9 @@ public class PaymentOverdue extends AppCompatActivity implements PaymentResultLi
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog = new ProgressDialog(PaymentOverdue.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
                 startPayment();
             }
         });
@@ -133,12 +140,17 @@ public class PaymentOverdue extends AppCompatActivity implements PaymentResultLi
                 public void onSuccess(Void aVoid) {
                     Intent i = new Intent(PaymentOverdue.this, MainScreen.class);
                     startActivity(i);
-                    finish();
+                    progressDialog.cancel();
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
+                    if(e instanceof FirebaseNetworkException){
+                        Toast.makeText(getApplicationContext(), "No internet connection",Toast.LENGTH_LONG).show(); //when a network failure
+                        progressDialog.cancel();
+                    }
                     Toast.makeText(getApplicationContext(), "Values not stored",Toast.LENGTH_SHORT).show();
+                    progressDialog.cancel();
                 }
             });
             }
@@ -151,6 +163,7 @@ public class PaymentOverdue extends AppCompatActivity implements PaymentResultLi
     public void onPaymentError(int i, String s)
     {
         Toast.makeText(this, "payment unsuccessful",Toast.LENGTH_LONG).show();
+        progressDialog.cancel();
     }
 
     // listener for radio buttons on plan activity
