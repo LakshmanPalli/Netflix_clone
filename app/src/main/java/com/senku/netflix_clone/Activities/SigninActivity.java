@@ -93,7 +93,6 @@ public class SigninActivity extends AppCompatActivity {
                                 firebaseEmail = documentSnapshot.getString("Email");
                                 firebaseContact = documentSnapshot.getString("Contact_Number");
 
-                                Log.i(DEBUG, "value of validDate: "+validDate+"value of today"+today); //--testing
                                 if (validDate != null && today != null) { //this if is to remove some errors if in case validDate & today variables are nulls
                                     if (validDate.compareTo(today) >= 0) { //if the validDate > today => 1; validDate == today => 0; validDate < today => -ve;
                                         Intent i = new Intent(SigninActivity.this, MainScreen.class);
@@ -115,7 +114,6 @@ public class SigninActivity extends AppCompatActivity {
                     } else {
                         if(task.getException() instanceof FirebaseNetworkException){
                             Toast.makeText(getApplicationContext(), "No internet connection",Toast.LENGTH_LONG).show(); //when a network failure
-                            progressBar.setVisibility(View.GONE);
                         }
                         if (task.getException() instanceof FirebaseAuthInvalidUserException){
                             Toast.makeText(getApplicationContext(), "User does not exist", Toast.LENGTH_LONG).show();
