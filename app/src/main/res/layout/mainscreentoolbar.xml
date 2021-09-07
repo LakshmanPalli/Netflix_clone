@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/swipetoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:theme="@style/Theme.AppCompat.Dialog"
+        android:background="#000"
+        android:padding="0dp"
+        tools:ignore="MissingConstraints">
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000">
+
+        <ImageView
+            android:id="@+id/netflixlogo"
+            android:layout_width="101dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="3dp"
+            android:src="@drawable/ic_netflix_logo_icon_170918" />
+
+        <TextView
+            android:id="@+id/tvseriesId"
+            android:layout_width="wrap_content"
+            android:layout_height="29dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_toEndOf="@+id/netflixlogo"
+            android:text="TvSeries"
+            android:textColor="#F3F1F1"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/moviesId"
+            android:layout_width="190dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_toEndOf="@+id/tvseriesId"
+            android:text="Movies"
+            android:textColor="#F3F1F1"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+</merge>
