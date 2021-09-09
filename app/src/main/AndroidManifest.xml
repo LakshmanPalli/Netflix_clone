@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Netflix_clone">
-        <activity android:name=".MainScreens.TvSeries"></activity>
+        <activity android:name=".MainScreens.VideoPlayer"></activity>
+        <activity android:name=".MainScreens.MovieDetails" />
+        <activity android:name=".MainScreens.Search" />
+        <activity android:name=".MainScreens.TvSeries" />
         <activity android:name=".MainScreens.Settings" />
         <activity android:name=".MainScreens.Movies" />
         <activity android:name=".Activities.PaymentOverdue" />

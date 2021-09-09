@@ -8,6 +8,10 @@
     <color name="progressbar">#d9262a</color>
     <color name="activedots">#CD1212</color>
     <color name="inactivedots">#48494A</color>
+    <color name="item_selected">#fff</color>
+    <color name="item_unselected">#878585</color>
+    <color name="bottom_navigation">#2B2A2A</color>
     <color name="white">#fff</color>
     <color name="black">#000</color>
+
 </resources>

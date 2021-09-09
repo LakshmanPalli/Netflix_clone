@@ -7,4 +7,30 @@
     tools:context=".MainScreens.Movies">
 
     <include layout="@layout/moviescreentoolbar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/moviesRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="585dp"
+            android:layout_marginTop="50dp"
+            />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="95dp"
+            android:id="@+id/movies_bottom_naviagtion"
+            android:background="@color/bottom_navigation"
+            app:itemIconTint="@drawable/itemselected"
+            app:itemTextColor="@drawable/itemselected"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigator"
+            />
+
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
