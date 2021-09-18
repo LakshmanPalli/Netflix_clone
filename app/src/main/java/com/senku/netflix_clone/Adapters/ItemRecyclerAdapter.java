@@ -15,6 +15,7 @@ import com.senku.netflix_clone.MainScreens.MovieDetails;
 import com.senku.netflix_clone.Model.CategoryItemList;
 import com.senku.netflix_clone.R;
 
+import java.util.ArrayList;
 import java.util.List;
 //we use this class to adapt(fetch the image urls) the content into all other recycler view movieDetails
 public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapter.ItemViewHolder> {
@@ -22,11 +23,12 @@ public class ItemRecyclerAdapter extends RecyclerView.Adapter<ItemRecyclerAdapte
     List<CategoryItemList> categoryItemList;
     List<CategoryItemList> moviesListAll;
 
-    public ItemRecyclerAdapter(Context context, List<CategoryItemList> categoryItemList, List<CategoryItemList> moviesListAll) {
+    public ItemRecyclerAdapter(Context context, List<CategoryItemList> categoryItemList) {
         this.context = context;
         this.categoryItemList = categoryItemList;
-        this.moviesListAll = moviesListAll;
+        this.moviesListAll = new ArrayList<>(categoryItemList);
     }
+
 
     @NonNull
     @Override

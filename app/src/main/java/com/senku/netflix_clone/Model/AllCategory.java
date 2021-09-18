@@ -17,6 +17,8 @@ public class AllCategory {
     @Expose
     private List<CategoryItemList> categoryItemList = null;
 
+
+
     public Integer getCategoryId() {
         return categoryId;
     }
